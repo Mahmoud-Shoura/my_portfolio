@@ -21,7 +21,8 @@
     transition: var(--transition);
 }
 
-.about-me-image:hover {
+.about-me-image:hover,
+.about-me-image.active {
     transform: rotate(0deg);
 }
 
@@ -77,7 +78,7 @@
         width: 50%;
         margin: 2rem auto 4rem;
     }
-    
+
     .about-content p {
         margin: 1rem 0 1.5rem;
     }
