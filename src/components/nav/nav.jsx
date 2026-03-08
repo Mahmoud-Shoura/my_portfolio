@@ -1,39 +1,24 @@
-import { useState, useEffect } from "react";
 import "./nav.css";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
 import { BiBook, BiMessageSquareDetail } from "react-icons/bi";
 import { RiServiceLine } from "react-icons/ri";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
 
 const Nav = () => {
-  const [activeNav, setActiveNav] = useState("#");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop === 0) {
-        setActiveNav("#home");
-      } else {
-        setActiveNav("");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  console.log("Active Nav:", activeNav);
-
   return (
-    <nav>
+    <motion.nav
+      initial={{ y: 100, x: "-50%", opacity: 0 }}
+      animate={{ y: 0, x: "-50%", opacity: 1 }}
+      transition={{ duration: 1, delay: 1 }}
+    >
       <Link
         to="home"
         spy={true}
         smooth={true}
         duration={500}
         activeClass="active"
+        offset={-70}
       >
         <AiOutlineHome />
       </Link>
@@ -43,6 +28,7 @@ const Nav = () => {
         smooth={true}
         duration={500}
         activeClass="active"
+        offset={-70}
       >
         <AiOutlineUser />
       </Link>
@@ -52,6 +38,7 @@ const Nav = () => {
         smooth={true}
         duration={500}
         activeClass="active"
+        offset={-70}
       >
         <BiBook />
       </Link>
@@ -61,6 +48,7 @@ const Nav = () => {
         smooth={true}
         duration={500}
         activeClass="active"
+        offset={-70}
       >
         <RiServiceLine />
       </Link>
@@ -70,10 +58,11 @@ const Nav = () => {
         smooth={true}
         duration={500}
         activeClass="active"
+        offset={-70}
       >
         <BiMessageSquareDetail />
       </Link>
-    </nav>
+    </motion.nav>
   );
 };
 

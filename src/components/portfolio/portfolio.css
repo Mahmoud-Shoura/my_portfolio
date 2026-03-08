@@ -4,12 +4,19 @@
     gap: 2.5rem;
 }
 
+.portfolio-tilt {
+    height: 100%;
+}
+
 .portfolio-item {
     background: var(--color-bg-variant);
-    padding: 1.2rem;
+    padding: 1.3rem;
     border-radius: 2rem;
     border: 1px solid transparent;
     transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-item:hover {
@@ -20,10 +27,13 @@
 .portfolio-item-image {
     border-radius: 1.5rem;
     overflow: hidden;
+    aspect-ratio: 16/9;
 }
 
 .portfolio-item h3 {
     margin: 1.2rem 0 2rem;
+    font-size: 1.1rem;
+    flex-grow: 1;
 }
 
 .portfolio-item-cta {

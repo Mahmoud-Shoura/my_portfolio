@@ -1,31 +1,9 @@
-// import React from "react";
 import "./experience.css";
-// import { BsPatchCheckFill } from "react-icons/bs";
 import { FaHtml5, FaCss3Alt, FaBootstrap, FaReact, FaNodeJs, FaPython } from "react-icons/fa";
 import { SiJavascript, SiTailwindcss, SiMongodb, SiCplusplus } from "react-icons/si";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
-const experience = () => {
-  const [isActive, setIsActive] = useState(false);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsActive(entry.isIntersecting);
-      },
-      { threshold: 0.2 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      if (containerRef.current) observer.disconnect();
-    };
-  }, []);
-
+const Experience = () => {
   const getLevelWidth = (level) => {
     switch (level) {
       case 'Experienced': return '95%';
@@ -35,116 +13,113 @@ const experience = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+  };
+
   return (
     <section id="experience">
       <h5>What Skills I Have</h5>
       <h2>My Experience</h2>
 
-      <div className="container experience-container" ref={containerRef}>
-        <div className={`experience-frontend ${isActive ? 'neon-active' : ''}`}>
+      <div className="container experience-container">
+        <motion.div
+          className="experience-frontend glass"
+          variants={cardVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <h3>Frontend Development</h3>
-          <div className="experience-content">
-            <article className="experience-details">
-              <FaHtml5 className="experience-details-icon" />
-              <div>
-                <h4>HTML</h4>
-                <small className="text-light">Experienced</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Experienced') }}></div></div>
-              </div>
-            </article>
+          <motion.div
+            className="experience-content"
+            variants={containerVariants}
+          >
+            {[
+              { icon: FaHtml5, name: 'HTML', level: 'Experienced' },
+              { icon: FaCss3Alt, name: 'CSS', level: 'Experienced' },
+              { icon: SiJavascript, name: 'JavaScript', level: 'Experienced' },
+              { icon: FaBootstrap, name: 'Bootstrap', level: 'Experienced' },
+              { icon: SiTailwindcss, name: 'Tailwind', level: 'Experienced' },
+              { icon: FaReact, name: 'React', level: 'Experienced' },
+            ].map((skill, index) => (
+              <motion.article key={index} className="experience-details" variants={itemVariants}>
+                <skill.icon className="experience-details-icon" />
+                <div>
+                  <h4>{skill.name}</h4>
+                  <small className="text-light">{skill.level}</small>
+                  <div className="progress-bar">
+                    <motion.div
+                      className="progress-fill"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: getLevelWidth(skill.level) }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    ></motion.div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </motion.div>
 
-            <article className="experience-details">
-              <FaCss3Alt className="experience-details-icon" />
-              <div>
-                <h4>CSS</h4>
-                <small className="text-light">Experienced</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Experienced') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <SiJavascript className="experience-details-icon" />
-              <div>
-                <h4>JavaScript</h4>
-                <small className="text-light">Experienced</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Experienced') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <FaBootstrap className="experience-details-icon" />
-              <div>
-                <h4>Bootstrap</h4>
-                <small className="text-light">Experienced</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Experienced') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <SiTailwindcss className="experience-details-icon" />
-              <div>
-                <h4>Tailwind</h4>
-                <small className="text-light">Experienced</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Experienced') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <FaReact className="experience-details-icon" />
-              <div>
-                <h4>React</h4>
-                <small className="text-light">Experienced</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Experienced') }}></div></div>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        {/* end of frontend */}
-
-        <div className={`experience-backend ${isActive ? 'neon-active' : ''}`}>
+        <motion.div
+          className="experience-backend glass"
+          variants={{
+            hidden: { opacity: 0, x: 50 },
+            visible: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <h3>Things I know</h3>
-          <div className="experience-content">
-            <article className="experience-details">
-              <FaNodeJs className="experience-details-icon" />
-              <div>
-                <h4>Node JS</h4>
-                <small className="text-light">Basic</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Basic') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <SiMongodb className="experience-details-icon" />
-              <div>
-                <h4>MongoDB</h4>
-                <small className="text-light">Basic</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Basic') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <FaPython className="experience-details-icon" />
-              <div>
-                <h4>Python</h4>
-                <small className="text-light">Basic</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Basic') }}></div></div>
-              </div>
-            </article>
-
-            <article className="experience-details">
-              <SiCplusplus className="experience-details-icon" />
-              <div>
-                <h4>C & C++</h4>
-                <small className="text-light">Intermediate</small>
-                <div className="progress-bar"><div className="progress-fill" style={{ '--target-width': getLevelWidth('Intermediate') }}></div></div>
-              </div>
-            </article>
-          </div>
-        </div>
+          <motion.div
+            className="experience-content"
+            variants={containerVariants}
+          >
+            {[
+              { icon: FaNodeJs, name: 'Node JS', level: 'Basic' },
+              { icon: SiMongodb, name: 'MongoDB', level: 'Basic' },
+              { icon: FaPython, name: 'Python', level: 'Basic' },
+              { icon: SiCplusplus, name: 'C & C++', level: 'Intermediate' },
+            ].map((skill, index) => (
+              <motion.article key={index} className="experience-details" variants={itemVariants}>
+                <skill.icon className="experience-details-icon" />
+                <div>
+                  <h4>{skill.name}</h4>
+                  <small className="text-light">{skill.level}</small>
+                  <div className="progress-bar">
+                    <motion.div
+                      className="progress-fill"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: getLevelWidth(skill.level) }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    ></motion.div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-export default experience;
+export default Experience;

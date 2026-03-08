@@ -1,31 +1,20 @@
-// import React from "react";
 import "./about.css";
 import ME from "../../assets/me-3-fotor-bg-remover-2024042512710.png";
 import { FaAward } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 import { VscFolderLibrary } from "react-icons/vsc";
 import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+import Tilt from "react-parallax-tilt";
+import PropTypes from 'prop-types';
 
 const CountUp = ({ end, duration = 2000, suffix = "" }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
+    if (!isInView) return;
     let startTime;
     let animationFrame;
 
@@ -43,13 +32,18 @@ const CountUp = ({ end, duration = 2000, suffix = "" }) => {
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [isVisible, end, duration]);
+  }, [isInView, end, duration]);
 
   return <span ref={ref}>{count}{suffix}</span>;
 };
 
+CountUp.propTypes = {
+  end: PropTypes.number.isRequired,
+  duration: PropTypes.number,
+  suffix: PropTypes.string,
+};
 
-const about = () => {
+const About = () => {
   const getAge = () => {
     const birthYear = 2001;
     const currentYear = new Date().getFullYear();
@@ -60,75 +54,94 @@ const about = () => {
   const currentYear = new Date().getFullYear();
   const experienceYears = currentYear - startYear;
 
-
-  const [isImageVisible, setIsImageVisible] = useState(false);
-  const imageRef = useRef(null);
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { threshold: 0.2 });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        setIsImageVisible(entry.isIntersecting);
-      },
-      { threshold: 0.5 }
-    );
-
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
+    if (isInView) {
+      controls.start("visible");
     }
+  }, [controls, isInView]);
 
-    return () => {
-      if (imageRef.current) {
-        observer.unobserve(imageRef.current);
-      }
-    };
-  }, []);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
     <section id="about">
       <h5>Get To Know</h5>
       <h2>About Me</h2>
 
-      <div className="container about-container">
-        <div className="about-me">
-          <div className={`about-me-image ${isImageVisible ? 'active' : ''}`} ref={imageRef}>
-            <img src={ME} alt="About Img" />
-          </div>
-        </div>
+      <motion.div
+        className="container about-container"
+        ref={ref}
+        variants={containerVariants}
+        initial="hidden"
+        animate={controls}
+      >
+        <motion.div className="about-me" variants={itemVariants}>
+          <Tilt tiltMaxAngleX={15} tiltMaxAngleY={15} glareEnable={true} glareMaxOpacity={0.45} className="about-me-tilt">
+            <div className="about-me-image">
+              <img src={ME} alt="About Img" />
+            </div>
+          </Tilt>
+        </motion.div>
+
         <div className="about-content">
           <div className="about-cards">
-            <article className="about-card">
-              <FaAward className="about-icon" />
-              <h5>Experience</h5>
-              <small><CountUp end={experienceYears} suffix="+" /> Years Working</small>
-            </article>
+            <motion.div variants={itemVariants}>
+              <Tilt className="about-card" tiltMaxAngleX={20} tiltMaxAngleY={20}>
+                <FaAward className="about-icon" />
+                <h5>Experience</h5>
+                <small><CountUp end={experienceYears} suffix="+" /> Years Working</small>
+              </Tilt>
+            </motion.div>
 
-            <article className="about-card">
-              <FiUsers className="about-icon" />
-              <h5>Clients</h5>
-              <small><CountUp end={200} suffix="+" /> Worldwide</small>
-            </article>
+            <motion.div variants={itemVariants}>
+              <Tilt className="about-card" tiltMaxAngleX={20} tiltMaxAngleY={20}>
+                <FiUsers className="about-icon" />
+                <h5>Clients</h5>
+                <small><CountUp end={200} suffix="+" /> Worldwide</small>
+              </Tilt>
+            </motion.div>
 
-            <article className="about-card">
-              <VscFolderLibrary className="about-icon" />
-              <h5>Projects</h5>
-              <small><CountUp end={50} suffix="+" /> Completed</small>
-            </article>
+            <motion.div variants={itemVariants}>
+              <Tilt className="about-card" tiltMaxAngleX={20} tiltMaxAngleY={20}>
+                <VscFolderLibrary className="about-icon" />
+                <h5>Projects</h5>
+                <small><CountUp end={50} suffix="+" /> Completed</small>
+              </Tilt>
+            </motion.div>
           </div>
 
-          <p>
+          <motion.p variants={itemVariants}>
             My name is Mahmoud Hamed, a {getAge()}-year-old front-end developer. I began
             my journey in programming by studying C and C++ languages before
             diving into HTML, CSS, and JavaScript. Later on, I shifted my focus
             to React, where I honed my skills to develop full-fledged projects.
-          </p>
-          <a href="#contact" className="btn btn-primary">
-            Let&rsquo;s Talk
-          </a>
+          </motion.p>
+
+          <motion.div variants={itemVariants}>
+            <a href="#contact" className="btn btn-primary">
+              Let&rsquo;s Talk
+            </a>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
 
-export default about;
+export default About;

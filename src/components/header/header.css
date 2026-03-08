@@ -8,14 +8,18 @@ header {
     text-align: center;
     height: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* ================= CTA ================= */
 .cta {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     display: flex;
     gap: 1.2rem;
     justify-content: center;
+    z-index: 5;
 }
 
 /* ================= HEADER SOCIALS ================= */
@@ -37,56 +41,23 @@ header {
 }
 
 /* ================= ME ================= */
-/* ================= ME ================= */
 .me {
     background: linear-gradient(var(--color-primary), transparent);
     width: 22rem;
-    height: 28rem;
-    position: absolute;
-    left: calc(50% - 11rem);
-    margin-top: 2em;
+    height: 30rem;
+    margin-top: 4rem;
     border-radius: 12rem 12rem 0 0;
     overflow: hidden;
     padding: 2rem 1.5rem 1.5rem 0.5rem;
-
-    /* Neon Border Effect */
-    border: 2px solid transparent;
-    box-shadow: 0 0 10px transparent;
-    transition: all 0.4s ease;
+    border: 2px solid var(--color-primary-variant);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    position: relative;
+    transition: var(--transition);
 }
 
-.me.neon-active {
-    animation: neon-flicker 2s ease-in-out forwards;
-}
-
-/* Neon Flicker Animation */
-@keyframes neon-flicker {
-
-    0%,
-    19%,
-    21%,
-    23%,
-    25%,
-    54%,
-    56%,
-    100% {
-        border-color: var(--color-primary);
-        box-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-primary), inset 0 0 10px var(--color-primary);
-    }
-
-    20%,
-    24%,
-    55% {
-        border-color: transparent;
-        box-shadow: none;
-    }
-}
-
-/* Stable Neon State on Hover */
 .me:hover {
-    border-color: #00fff2;
-    /* Brighter Cyan */
-    box-shadow: 0 0 20px #00fff2, 0 0 40px var(--color-primary), inset 0 0 20px var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
 }
 
 /* ================= PROGRAMMING SHAPES ================= */
@@ -97,7 +68,6 @@ header {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    /* Let clicks pass through to image if needed */
     z-index: 10;
 }
 
@@ -105,89 +75,25 @@ header {
     position: absolute;
     font-size: 2rem;
     color: #fff;
-    opacity: 0;
-    transform: scale(0) translate(0, 0);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0.6;
+    transition: all 0.5s ease;
 }
 
-/* Icons positioning (relative to .me container) */
-.icon.react {
-    top: 20%;
-    left: 10%;
-    color: #61DAFB;
-}
+.icon.react { top: 20%; left: 10%; color: #61DAFB; }
+.icon.node { top: 15%; right: 15%; color: #339933; }
+.icon.html { top: 50%; left: 5%; color: #E34F26; }
+.icon.css { top: 50%; right: 5%; color: #1572B6; }
+.icon.js { bottom: 20%; left: 15%; color: #F7DF1E; }
+.icon.python { bottom: 25%; right: 20%; color: #3776AB; }
 
-.icon.node {
-    top: 15%;
-    right: 15%;
-    color: #339933;
-}
-
-.icon.html {
-    top: 50%;
-    left: 5%;
-    color: #E34F26;
-}
-
-.icon.css {
-    top: 50%;
-    right: 5%;
-    color: #1572B6;
-}
-
-.icon.js {
-    bottom: 20%;
-    left: 15%;
-    color: #F7DF1E;
-}
-
-.icon.python {
-    bottom: 25%;
-    right: 20%;
-    color: #3776AB;
-}
-
-/* Show and Animate Icons on Hover */
 .me:hover .icon {
     opacity: 1;
-    transform: scale(1);
     animation: float-icon 3s ease-in-out infinite;
 }
 
-.me:hover .icon.react {
-    animation-delay: 0s;
-}
-
-.me:hover .icon.node {
-    animation-delay: 0.5s;
-}
-
-.me:hover .icon.html {
-    animation-delay: 1s;
-}
-
-.me:hover .icon.css {
-    animation-delay: 1.5s;
-}
-
-.me:hover .icon.js {
-    animation-delay: 2s;
-}
-
-.me:hover .icon.python {
-    animation-delay: 2.5s;
-}
-
 @keyframes float-icon {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-10px) scale(1.1) rotate(5deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
 }
 
 /* ================= SCROLL DOWN ================= */
@@ -204,29 +110,13 @@ header {
 @media screen and (max-width: 1024px) {
     header {
         height: 100vh;
-        /* margin-top: 1rem; */
         padding-top: 8rem;
     }
 
     .me {
-        margin-top: 3rem;
+        width: 18rem;
+        height: 25rem;
     }
-
-    .me {
-        background: linear-gradient(var(--color-primary), transparent);
-        width: 22rem;
-        height: 28rem;
-        position: absolute;
-        left: calc(50% - 11rem);
-        border-radius: 12rem 12rem 0 0;
-        overflow: hidden;
-        padding: 0rem 1.5rem 1.5rem 0.5rem;
-        /* Keep border effect */
-        border: 2px solid transparent;
-        /* Will be overridden by animation */
-        animation: neon-flicker 2s ease-in-out forwards;
-    }
-
 }
 
 /* ============== MEDIA QUERIES (SMALL DEVICES) ============ */
@@ -236,23 +126,12 @@ header {
         padding-top: 5rem;
     }
 
-    .header-socials,
-    .scroll-down {
+    .header-socials, .scroll-down {
         display: none;
     }
 
     .me {
-        background: linear-gradient(var(--color-primary), transparent);
-        width: 22rem;
-        height: 28rem;
-        position: absolute;
-        left: calc(50% - 11rem);
-        border-radius: 12rem 12rem 0 0;
-        overflow: hidden;
-        padding: 1rem 1.5rem 1.5rem 0.5rem;
-        /* Keep border effect */
-        border: 2px solid transparent;
-        animation: neon-flicker 2s ease-in-out forwards;
+        width: 16rem;
+        height: 22rem;
     }
-
 }

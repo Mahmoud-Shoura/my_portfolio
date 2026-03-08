@@ -1,4 +1,3 @@
-// import React from "react";
 import "./portfolio.css";
 import IMG1 from "../../assets/Edusity.png";
 import IMG2 from "../../assets/Autumn.png";
@@ -8,6 +7,8 @@ import IMG5 from "../../assets/MHS-site.png";
 import IMG6 from "../../assets/animated-portfolio.png";
 import IMG7 from "../../assets/Gym-Website.png";
 import IMG8 from "../../assets/nestcare.png";
+import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
 const data = [
   {
@@ -68,7 +69,7 @@ const data = [
   },
 ];
 
-const portfolio = () => {
+const Portfolio = () => {
   return (
     <section id="portfolio">
       <h5>My Recent Work</h5>
@@ -77,20 +78,30 @@ const portfolio = () => {
       <div className="container portfolio-container">
         {data.map(({ id, image, title, github, demo }) => {
           return (
-            <article key={id} className="portfolio-item">
-              <div className="portfolio-item-image">
-                <img src={image} alt={title} />
-              </div>
-              <h3>{title}</h3>
-              <div className="portfolio-item-cta">
-                <a href={github} className="btn" target="__blank">
-                  Github
-                </a>
-                <a href={demo} className="btn btn-primary" target="__blank">
-                  Live Demo
-                </a>
-              </div>
-            </article>
+            <motion.div
+              key={id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <Tilt tiltMaxAngleX={15} tiltMaxAngleY={15} className="portfolio-tilt">
+                <article className="portfolio-item glass">
+                  <div className="portfolio-item-image">
+                    <img src={image} alt={title} />
+                  </div>
+                  <h3>{title}</h3>
+                  <div className="portfolio-item-cta">
+                    <a href={github} className="btn" target="__blank">
+                      Github
+                    </a>
+                    <a href={demo} className="btn btn-primary" target="__blank">
+                      Live Demo
+                    </a>
+                  </div>
+                </article>
+              </Tilt>
+            </motion.div>
           );
         })}
       </div>
@@ -98,4 +109,4 @@ const portfolio = () => {
   );
 };
 
-export default portfolio;
+export default Portfolio;
