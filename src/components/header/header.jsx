@@ -1,4 +1,4 @@
-import ME from "../../assets/me-4.png";
+import ME from "../../assets/me-4.webp";
 import HeaderSocial from "./HeaderSocials";
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt } from "react-icons/fa";
 import { SiJavascript, SiPython } from "react-icons/si";

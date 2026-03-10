@@ -1,5 +1,5 @@
 import "./about.css";
-import ME from "../../assets/me-3-fotor-bg-remover-2024042512710.png";
+import ME from "../../assets/me-3-fotor-bg-remover-2024042512710.webp";
 import { FaAward } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 import { VscFolderLibrary } from "react-icons/vsc";
