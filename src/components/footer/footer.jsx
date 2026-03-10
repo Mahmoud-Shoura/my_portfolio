@@ -13,7 +13,7 @@ const Footer = () => {
       viewport={{ once: true }}
     >
       <a href="#" className="footer-logo">
-        MAHMOUD
+        MHS
       </a>
 
       <ul className="permalinks">
@@ -33,7 +33,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-copyright">
-        <small>&copy; Mahmoud Shoura. All rights reserved.</small>
+        <small>&copy; MHS. All rights reserved.</small>
       </div>
     </motion.footer>
   );
