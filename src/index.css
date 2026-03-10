@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600display=swp');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 * {
     margin: 0;
@@ -9,18 +9,16 @@
     list-style: none;
     text-decoration: none;
 }
-/* #4db5ff */
-/* #31e8ff */
+
 :root {
-    --color-bg: #111118;
-    --color-bg-variant: #303055;
-    --color-primary: #31e8ff;
-    --color-primary-variant: rgba(77, 181, 255, 0.4);
-    --color-white: #fff;
-    --color-light: rgba(255, 255, 255, 0.6);
+    --color-bg: #0f172a;
+    --color-bg-variant: #1e293b;
+    --color-primary: #38bdf8;
+    --color-primary-variant: rgba(56, 189, 248, 0.4);
+    --color-white: #f8fafc;
+    --color-light: #94a3b8;
 
     --transition: all 400ms ease;
-
 
     --container-width-lg: 75%;
     --container-width-md: 86%;
@@ -31,8 +29,22 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary-variant);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
 }
 
 body {
@@ -40,11 +52,48 @@ body {
     background: var(--color-bg);
     color: var(--color-white);
     line-height: 1.7;
-    background-image: url(../src/assets/bg-texture.png);
+    overflow-x: hidden;
+    position: relative;
 }
 
+/* Animated Background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+    z-index: -2;
+}
 
-/* ============ GENEARL STYLES ============== */
+body::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Glassmorphism Helper */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* ============ GENERAL STYLES ============== */
 .container {
     width: var(--container-width-lg);
     margin: 0 auto;
@@ -55,22 +104,28 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 section {
-    margin-top: 8rem;
-    /* height: 100vh; */
+    margin-top: 10rem;
 }
 
 section > h2, section > h5 {
     text-align: center;
+}
+
+section > h5 {
     color: var(--color-light);
 }
 
 section > h2 {
     color: var(--color-primary);
     margin-bottom: 3rem;
+    font-size: 2rem;
 }
 
 .text-light {
@@ -95,12 +150,15 @@ a:hover {
     cursor: pointer;
     border: 1px solid var(--color-primary);
     transition: var(--transition);
+    background: transparent;
 }
 
 .btn:hover {
     background: var(--color-white);
     color: var(--color-bg);
     border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .btn-primary {
@@ -133,5 +191,9 @@ img {
 
     section > h2 {
         margin-bottom: 2rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
     }
 }
