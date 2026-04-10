@@ -5,7 +5,7 @@ import IMG2 from "../../assets/Autumn.png";
 import IMG3 from "../../assets/shopper-mhs.png";
 import IMG4 from "../../assets/tailwind-project.png";
 import IMG5 from "../../assets/MHS-site.png";
-import IMG6 from "../../assets/animated-portfolio.png";
+import IMG6 from "../../assets/ox-travel.png";
 import IMG7 from "../../assets/Gym-Website.png";
 import IMG8 from "../../assets/nestcare.png";
 import { motion } from "framer-motion";
@@ -54,13 +54,13 @@ const data = [
     github: "https://github.com/Mahmoud-Shoura/portfolio-website-MHS",
     demo: "https://master--portfolio-website-mhs.netlify.app/",
   },
-  // {
-  //   id: 6,
-  //   image: IMG6,
-  //   title: "Responciv Animated portfolio with react & framer motion",
-  //   github: "https://github.com/Mahmoud-Shoura/animated-portfolio",
-  //   demo: "https://chic-stroopwafel-7c93af.netlify.app/",
-  // },
+  {
+    id: 6,
+    image: IMG6,
+    title: "ox travel responsive website",
+    github: "https://github.com/Mahmoud-Shoura/ox-travel",
+    demo: "https://oxtravle.netlify.app",
+  },
   {
     id: 7,
     image: IMG7,
