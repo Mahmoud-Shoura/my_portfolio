@@ -1,4 +1,5 @@
 import "./portfolio.css";
+import IMG0 from "../../assets/Screenshot 2026-04-10 195415.png";
 import IMG1 from "../../assets/Edusity.png";
 import IMG2 from "../../assets/Autumn.png";
 import IMG3 from "../../assets/shopper-mhs.png";
@@ -11,6 +12,13 @@ import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 
 const data = [
+  {
+    id: 0,
+    image: IMG0,
+    title: "AUIE Website full stack using react & nodejs",
+    github: "https://github.com/Mahmoud-Shoura/AUIE-Website",
+    demo: "https://auie-edu.us",
+  },
   {
     id: 1,
     image: IMG1,
@@ -46,13 +54,13 @@ const data = [
     github: "https://github.com/Mahmoud-Shoura/portfolio-website-MHS",
     demo: "https://master--portfolio-website-mhs.netlify.app/",
   },
-  {
-    id: 6,
-    image: IMG6,
-    title: "Responciv Animated portfolio with react & framer motion",
-    github: "https://github.com/Mahmoud-Shoura/animated-portfolio",
-    demo: "https://chic-stroopwafel-7c93af.netlify.app/",
-  },
+  // {
+  //   id: 6,
+  //   image: IMG6,
+  //   title: "Responciv Animated portfolio with react & framer motion",
+  //   github: "https://github.com/Mahmoud-Shoura/animated-portfolio",
+  //   demo: "https://chic-stroopwafel-7c93af.netlify.app/",
+  // },
   {
     id: 7,
     image: IMG7,

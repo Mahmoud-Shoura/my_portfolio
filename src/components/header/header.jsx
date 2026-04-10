@@ -43,7 +43,7 @@ const Header = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          Frontend Developer
+          Full Stack Developer
         </motion.h5>
 
         <motion.div
@@ -68,6 +68,17 @@ const Header = () => {
           }}
           whileHover={{ y: -10 }}
         >
+          <div className="diamond-grid">
+            <div className="diamond diamond-1"></div>
+            <div className="diamond diamond-2"></div>
+            <div className="diamond diamond-3"></div>
+            <div className="diamond diamond-4"></div>
+            <div className="diamond diamond-5"></div>
+            <div className="diamond diamond-6"></div>
+            <div className="diamond diamond-7"></div>
+            <div className="diamond diamond-8"></div>
+            <div className="diamond diamond-9"></div>
+          </div>
           <img src={ME} alt="me" />
           <div className="programming-shapes">
             <span className="icon react"><FaReact /></span>

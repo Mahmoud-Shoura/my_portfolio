@@ -2,6 +2,20 @@ header {
     height: 100vh;
     padding-top: 4rem;
     overflow: hidden;
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='rgba(56,189,248,0.08)' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='rgba(56,189,248,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 56px 100px;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .header-container {
@@ -42,22 +56,69 @@ header {
 
 /* ================= ME ================= */
 .me {
-    background: linear-gradient(var(--color-primary), transparent);
     width: 22rem;
     height: 30rem;
     margin-top: 4rem;
-    border-radius: 12rem 12rem 0 0;
-    overflow: hidden;
+    overflow: visible;
     padding: 2rem 1.5rem 1.5rem 0.5rem;
-    border: 2px solid var(--color-primary-variant);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
     position: relative;
     transition: var(--transition);
 }
 
-.me:hover {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
+.me img {
+    position: relative;
+    z-index: 2;
+}
+
+/* ================= DIAMOND GRID ================= */
+.diamond-grid {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22rem;
+    height: 30rem;
+    z-index: 0;
+}
+
+.diamond {
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    transform: rotate(45deg);
+    border: 2px solid rgba(56, 189, 248, 0.25);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(56, 189, 248, 0.02));
+    box-shadow:
+        0 0 15px rgba(56, 189, 248, 0.15),
+        inset 0 0 15px rgba(56, 189, 248, 0.05);
+    border-radius: 6px;
+    transition: all 0.5s ease;
+    backdrop-filter: blur(4px);
+}
+
+.me:hover .diamond {
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow:
+        0 0 25px rgba(56, 189, 248, 0.3),
+        inset 0 0 20px rgba(56, 189, 248, 0.1);
+}
+
+/* 3x3 diamond grid positions */
+.diamond-1 { top: 0; left: calc(50% - 3.5rem); animation: diamondFloat 4s ease-in-out infinite 0s; }
+.diamond-2 { top: 0; left: calc(50% - 9rem); animation: diamondFloat 4s ease-in-out infinite 0.3s; }
+.diamond-3 { top: 0; right: calc(50% - 9rem); animation: diamondFloat 4s ease-in-out infinite 0.6s; }
+
+.diamond-4 { top: 35%; left: calc(50% - 3.5rem); animation: diamondFloat 4s ease-in-out infinite 0.9s; }
+.diamond-5 { top: 35%; left: calc(50% - 9rem); animation: diamondFloat 4s ease-in-out infinite 1.2s; }
+.diamond-6 { top: 35%; right: calc(50% - 9rem); animation: diamondFloat 4s ease-in-out infinite 1.5s; }
+
+.diamond-7 { top: 68%; left: calc(50% - 3.5rem); animation: diamondFloat 4s ease-in-out infinite 1.8s; }
+.diamond-8 { top: 68%; left: calc(50% - 9rem); animation: diamondFloat 4s ease-in-out infinite 2.1s; }
+.diamond-9 { top: 68%; right: calc(50% - 9rem); animation: diamondFloat 4s ease-in-out infinite 2.4s; }
+
+@keyframes diamondFloat {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50% { transform: rotate(45deg) translateY(-8px); }
 }
 
 /* ================= PROGRAMMING SHAPES ================= */
@@ -117,6 +178,26 @@ header {
         width: 18rem;
         height: 25rem;
     }
+
+    .diamond-grid {
+        width: 18rem;
+        height: 25rem;
+    }
+
+    .diamond {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .diamond-1 { left: calc(50% - 2.75rem); }
+    .diamond-2 { left: calc(50% - 7rem); }
+    .diamond-3 { right: calc(50% - 7rem); }
+    .diamond-4 { left: calc(50% - 2.75rem); }
+    .diamond-5 { left: calc(50% - 7rem); }
+    .diamond-6 { right: calc(50% - 7rem); }
+    .diamond-7 { left: calc(50% - 2.75rem); }
+    .diamond-8 { left: calc(50% - 7rem); }
+    .diamond-9 { right: calc(50% - 7rem); }
 }
 
 /* ============== MEDIA QUERIES (SMALL DEVICES) ============ */
@@ -126,7 +207,18 @@ header {
         padding-top: 5rem;
     }
 
-    .header-socials, .scroll-down {
+    .scroll-down {
+        display: none;
+    }
+
+    .header-socials {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+
+    .header-socials::after {
         display: none;
     }
 
@@ -134,4 +226,24 @@ header {
         width: 16rem;
         height: 22rem;
     }
+
+    .diamond-grid {
+        width: 16rem;
+        height: 22rem;
+    }
+
+    .diamond {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    .diamond-1 { left: calc(50% - 2.25rem); }
+    .diamond-2 { left: calc(50% - 5.5rem); }
+    .diamond-3 { right: calc(50% - 5.5rem); }
+    .diamond-4 { left: calc(50% - 2.25rem); }
+    .diamond-5 { left: calc(50% - 5.5rem); }
+    .diamond-6 { right: calc(50% - 5.5rem); }
+    .diamond-7 { left: calc(50% - 2.25rem); }
+    .diamond-8 { left: calc(50% - 5.5rem); }
+    .diamond-9 { right: calc(50% - 5.5rem); }
 }
