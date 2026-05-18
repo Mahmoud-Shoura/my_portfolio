@@ -1,7 +1,6 @@
 import "./footer.css";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaFacebookMessenger } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
-import { FiTwitter } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -29,7 +28,7 @@ const Footer = () => {
       <div className="footer-socials">
         <a href="https://www.facebook.com/mhmwd.hamd.318869"><FaFacebookF /></a>
         <a href="https://www.instagram.com/mahmoudhameed449/"><FiInstagram /></a>
-        <a href="https://twitter.com"><FiTwitter /></a>
+        <a href="https://www.facebook.com/messages/e2ee/t/1976304049587728/"><FaFacebookMessenger /></a>
       </div>
 
       <div className="footer-copyright">
